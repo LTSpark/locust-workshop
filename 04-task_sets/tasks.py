@@ -18,7 +18,7 @@ class SequentialOperationTasks(SequentialTaskSet):
         request['suffix'] = self.faker.company_suffix()
         request['phone_number'] = self.faker.phone_number()
 
-        self.client.post("api/v1/company", data=json.dumps(request), name="Get Company")
+        self.client.post("api/v1/company", data=json.dumps(request), name="Post Company")
     
     @task
     def put_company(self):

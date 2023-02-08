@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Optional
 from datetime import datetime
 
 from faker import Faker
@@ -11,7 +11,7 @@ company_router = APIRouter()
 
 
 @company_router.post("/api/v1/company", response_model=Company)
-async def create_company(company: CreateCompany, test_failure: bool, response: Response):
+async def create_company(company: CreateCompany, response: Response, test_failure: Optional[bool] = None):
     company_id = faker.random_int()
     if company_id % 7 == 0 and test_failure is True:
         raise HTTPException(

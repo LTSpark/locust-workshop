@@ -1,0 +1,7 @@
+.idea/
+__pycache__/
+.vscode/
+.DS_Store
+venv/
+
+05-logging/test_log.log

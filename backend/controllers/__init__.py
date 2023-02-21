@@ -1,1 +1,2 @@
 from controllers.company_controller import company_router
+from controllers.authorization_controller import  authorization_router

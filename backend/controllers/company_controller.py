@@ -1,8 +1,8 @@
-from typing import List, Optional
+from typing import List, Optional, Union
 from datetime import datetime
 
 from faker import Faker
-from fastapi import APIRouter, Response, HTTPException, status
+from fastapi import APIRouter, Response, HTTPException, status, Header
 
 from entity import Company, CreateCompany
 
@@ -55,6 +55,23 @@ async def get_companies(quantity: int):
             created_at=datetime.now()
         ))
     return companies
+
+
+@company_router.get("/api/v1/company/protected/auth", response_model=Company)
+async def protected_get(authorization: Union[str, None] = Header(default=None)):
+    if authorization is None:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Token not found"
+        )
+    return Company(
+        id=faker.random_int(),
+        name=faker.company(),
+        slogan=faker.catch_phrase(),
+        suffix=faker.company_suffix(),
+        phone_number=faker.phone_number(),
+        created_at=datetime.now()
+    )
 
 
 @company_router.put("/api/v1/company/{company_id}")

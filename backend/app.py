@@ -1,13 +1,17 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from controllers import company_router
+from controllers import company_router, authorization_router
 
 
 tags_metadata = [
     {
         "name": "Companies",
         "description": "Manage Companies database operations"
+    },
+    {
+        "name": "Authorization",
+        "description": "Authorization methods for Demo API"
     }
 ]
 
@@ -28,3 +32,4 @@ app.add_middleware(
 )
 
 app.include_router(company_router, tags=["Companies"])
+app.include_router(authorization_router, tags=["Authorization"])
